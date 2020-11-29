@@ -110,11 +110,11 @@ def main():
     print(expected_students_sheet.get_value('B3'), expected_students_sheet.get_value('A7'), expected_students_sheet.get_value('B7'))
     print(expected_students_sheet.get_value('B3'), expected_students_sheet.get_value('A8'), expected_students_sheet.get_value('B8'))
     print(expected_students_sheet.get_value('B3'), expected_students_sheet.get_value('A9'), expected_students_sheet.get_value('B9'))
-#    sessions = []
+#    my_sessions = []
 #    for i in expected_students_sheet:
-#        sessions.append(session.Session(i))
+#        my_sessions.append(session.Session(i))
  #       instructors.pop(0)  # delete instructor created from the header row
-#    [i.print() for i in sessions]
+#    [i.print() for i in my_sessions]
 
 
 if __name__ == '__main__':

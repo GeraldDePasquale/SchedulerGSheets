@@ -17,11 +17,11 @@ class Reducer:
 
     def reallocate_excess_center_capacity(self):
         if not self.home_session is None:
-            replacement_capacity_required = self.home_instructor.max_sess_cnt - self.home_instructor.student_capacity(
+            replacement_capacity_required = self.home_instructor.max_sess_cnt - self.home_instructor.remaining_student_capacity(
                 self.home_session)
             replacement_capacity_available = 0
             for i in self.center_instr_sess_tuples:
-                replacement_capacity_available = replacement_capacity_available + i[1].student_capacity(i[0])
+                replacement_capacity_available = replacement_capacity_available + i[1].remaining_student_capacity(i[0])
             if replacement_capacity_available >= replacement_capacity_required:
                 self.home_session.remove_instructor(self.home_instructor)
                 self.home_instructor.remove_session(self.home_session)
