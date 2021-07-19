@@ -9,9 +9,9 @@ INSTRUCTOR_SHEET_NAME = 'Form Responses 1' # 'TC Form Responses 1'
 SHEET_MASTER_NAME = 'Master Student Schedule (Version 6).20200910' # 'Test Case Master Schedule'
 # WKS_EXPECTED_STUDENTS_NAME = 'TC Expected Students' # 'Expected Students'
 WKS_ACTUAL_STUDENTS_NAME = 'Actual Students' #'TC Actual Students'
-ACT_STUDENT_COL_NUM = 13 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
+ACT_STUDENT_COL_NUM = 45 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
 
-SHEET_INSTRUCTOR_SCHEDULE_NAME = 'Schedule.20201130'
+SHEET_INSTRUCTOR_SCHEDULE_NAME = 'Schedule'
 WKS_SCHEDULE_NAME = 'Instructor Schedule'
 
 
@@ -63,7 +63,7 @@ def main():
                 s.add_instructor(i)
 
     if True:
-        print('Sessions Staffing Report')
+        print('\nSessions Staffing Report\n')
         fully_staffed = []
         not_fully_staffed = []
         for s in sessions:
@@ -78,7 +78,7 @@ def main():
             s.print_pretty()
 
     if False:
-        print('Staffing Efficiency Report\n')
+        print('\nStaffing Efficiency Report\n')
         session_count = len(sessions)
         student_count = 0
         instructor_hours_count = 0
@@ -97,31 +97,36 @@ def main():
         print('Waste: $', round((3 - students_per_instructor) * instructor_hours_count * 15))
 
     if False: #Print Instructor Schedules
+        print('\nInstructor Schedules\n')
         for i in instructors:
             i.print_schedule()
             print()
 
-    if False: # Print Instructor Session Count
-        print('Instructor Session Counts')
-        for i in instructors:
-            i.print_session_count()
-
     if True:
-        print('Students Expected Each Session')
+        print('\nStudents Expected Each Session\n')
         for s in sessions:
-            s.print()
+            s.print_comma_delimited()
+
+    if True: # Print Instructor Session Count
+        print('\nInstructor Session Counts\n')
+        for i in instructors:
+            i.print_session_count_comma_delimited()
 
     if False:
+        print('\nExtra Capacity Instructors\n')
         Instructor.print_extra_capacity_instructors(Instructor, sessions)
 
     if False:
+        print('\nMaster Schedule\n')
         Session.print_master_schedule(Session)
 
     if True: # print comma delimited my_sessions, by instructor, to transcript
+        print('\nInstructor Schedule\n')
         for i in instructors:
             i.print_sessions()
 
-    if True:
+    if False:
+        print('\nWriting Instructor Schedules to Google Spreadsheet\n')
         Instructor.write_sessions(Instructor, instructors, client, SHEET_INSTRUCTOR_SCHEDULE_NAME, WKS_SCHEDULE_NAME)
 
 if __name__ == '__main__':
