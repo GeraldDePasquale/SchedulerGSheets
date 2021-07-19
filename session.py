@@ -72,6 +72,9 @@ class Session:
     def print(self):
         print('Fully Staffed:', self.fully_staffed(), 'Day:', self.day, 'Loc:', self.location, 'Time:', self.time, 'Students:', self.students_to_serve, 'Instructors:', len(self.my_instructors))
 
+    def print_comma_delimited(self):
+        print(self.day + ','+ self.location+ ',' + self.time+ ',' + str(self.students_to_serve))
+
     def print_pretty(self):
         print('--------->', self.day_dict[self.day], self.location, self.time, 'Underserved students: ', str(self.students_to_serve - self.students_served))
 

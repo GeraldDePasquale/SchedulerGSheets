@@ -5,9 +5,10 @@ class Instructor:
     ordered_times = ['10 am','11 am','12 pm','4 pm','3 pm','4 pm','5 pm','6 pm']
     ordered_days = ['1', '2', '3', '4', '6']
     day_dict = {'0':'Sunday', '1':'Monday', '2':'Tuesday', '3': 'Wednesday', '4':'Thursday', '5':'Friday', '6':'Saturday'}
+    max_student_capacity = 3
 
     def __init__(self, data):
-        self.max_student_capacity = 3
+        self.max_student_capacity = Instructor.max_student_capacity
         self.my_data = data
         self.email = data[1]
         self.cell = data[2]
@@ -118,7 +119,7 @@ class Instructor:
         return self.max_student_capacity - self.student_count_day_time[session.day_time_tuple] #touched
 
     def hours_scheduled(self):
-        return len(self.my_sessions)
+        return len(self.my_sessions) - len(self.my_duplex_sessions)
 
     def print(self):
         print(self.full_name(), 'Hours Scheduled: ', self.hours_scheduled(), 'Sessions: ',
@@ -126,9 +127,15 @@ class Instructor:
 
     def print_session_count(self):
         if len(self.my_sessions) == 0:
-            print(self.full_name(), 'assigned 0 my_sessions.')
+            print(self.full_name(), 'assigned 0')
         else:
-            print(self.full_name(), 'assigned', self.hours_scheduled(), 'my_sessions:')
+            print(self.full_name(), 'assigned', self.hours_scheduled())
+
+    def print_session_count_comma_delimited(self):
+        if len(self.my_sessions) == 0:
+            print(self.full_name() + ',' + '0')
+        else:
+            print(self.full_name() + ',' + str(self.hours_scheduled()))
 
     def full_name(self):
         return self.first_name + ' ' + self.last_name
@@ -181,11 +188,11 @@ class Instructor:
             if self.has_duplex_session(s):
                 ds = self.get_duplex_session(s)
                 if not ds.location == s.location:
-                    print(self.full_name() + ',' + self.day_dict[s.day] +',' + s.time + ',' + s.location +
+                    print(self.full_name() + ',' + s.day +',' + s.time + ',' + s.location +
                         ',' + str(self.student_count_session[s]) + '@' + s.location + ':' +
                         str(self.student_count_session[ds]) + '@' + ds.location)
             else:
-                print(self.full_name() + ',' + self.day_dict[s.day] + ',' + s.time + ',' + s.location +
+                print(self.full_name() + ',' + s.day + ',' + s.time + ',' + s.location +
                       ',' + str(self.student_count_session[s])+'@' + s.location)
         return
 
