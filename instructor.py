@@ -2,13 +2,15 @@ from session import Session
 
 class Instructor:
     instructors = []
-    ordered_times = ['10 am','11 am','12 pm','4 pm','3 pm','4 pm','5 pm','6 pm']
+    ordered_times = ['10 am','11 am','12 pm','3:30 pm','4:30 pm','5:30 pm','6:30 pm']
     ordered_days = ['1', '2', '3', '4', '6']
     day_dict = {'0':'Sunday', '1':'Monday', '2':'Tuesday', '3': 'Wednesday', '4':'Thursday', '5':'Friday', '6':'Saturday'}
-    max_student_capacity = 3
+    max_inCenter_student_capacity = 3
+    max_atHome_student_capacity = 3
+    max_student_capacity = max_inCenter_student_capacity
 
     def __init__(self, data):
-        self.max_student_capacity = Instructor.max_student_capacity
+    #    self.max_student_capacity = Instructor.max_inCenter_student_capacity
         self.my_data = data
         self.email = data[1]
         self.cell = data[2]
@@ -116,7 +118,8 @@ class Instructor:
         return self.student_count_day_time[session.day_time_tuple] == self.max_student_capacity #touched
 
     def remaining_student_capacity(self, session):
-        return self.max_student_capacity - self.student_count_day_time[session.day_time_tuple] #touched
+        #return self.max_student_capacity - self.student_count_day_time[session.day_time_tuple] #touched
+        return Instructor.max_student_capacity - self.student_count_day_time[session.day_time_tuple] #touched
 
     def hours_scheduled(self):
         return len(self.my_sessions) - len(self.my_duplex_sessions)

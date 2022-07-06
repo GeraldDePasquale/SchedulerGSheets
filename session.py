@@ -3,9 +3,9 @@ class Session:
     sessions = [] # all my_sessions instantiated by create_sessions
 
     time_dict = {'8:00 AM':'8 am', '9:00 AM' : '9 am', '10:00 AM': '10 am', '11:00 AM': '11 am', \
-                '12:00 PM': '12 pm', '1:00 PM': '1 pm', '2:00 PM': '2 pm', '3:00 PM': '3 pm', \
-                 '4:00 PM': '4 pm', '5:00 PM': '5 pm', '6:00 PM' : '6 pm', '7:00 PM' : '7 pm', \
-                 '8:00 PM' : '8 pm'}
+                '12:00 PM': '12 pm', '1:00 PM': '1 pm', '2:00 PM': '2 pm', '3:30 PM': '3:30 pm', \
+                 '4:30 PM': '4:30 pm', '5:30 PM': '5:30 pm', '6:30 PM' : '6:30 pm', '7:30 PM' : '7:30 pm', \
+                 '8:30 PM' : '8:30 pm'}
     day_dict = {'0':'Sunday', '1':'Monday', '2':'Tuesday', '3': 'Wednesday', '4':'Thursday', '5':'Friday', '6':'Saturday'}
 
     def __init__(self, data, student_count_col_num):

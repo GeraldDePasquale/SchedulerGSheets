@@ -9,11 +9,10 @@ INSTRUCTOR_SHEET_NAME = 'Form Responses 1' # 'TC Form Responses 1'
 SHEET_MASTER_NAME = 'Master Student Schedule (Version 6).20200910' # 'Test Case Master Schedule'
 # WKS_EXPECTED_STUDENTS_NAME = 'TC Expected Students' # 'Expected Students'
 WKS_ACTUAL_STUDENTS_NAME = 'Actual Students' #'TC Actual Students'
-ACT_STUDENT_COL_NUM = 45 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
+ACT_STUDENT_COL_NUM = 98 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
 
 SHEET_INSTRUCTOR_SCHEDULE_NAME = 'Schedule'
 WKS_SCHEDULE_NAME = 'Instructor Schedule'
-
 
 SECRET_FILE = 'C:\PythonPrograms\SchedulerGSheets\Working Directory\credentials.json'
 
@@ -41,6 +40,7 @@ def main():
     # Find in-center my_sessions
 
     # Pass 1. Assign instructors to serve at center locations
+    Instructor.max_student_capacity = Instructor.max_inCenter_student_capacity
     for l in [chancellor_sessions, stafford_sessions]:
         for s in l:
             for i in instructors:
@@ -48,19 +48,27 @@ def main():
                     i.add_session(s)
                     s.add_instructor(i)
 
-    # Pass 2. Assign instructors to serve at home
-    for s in home_sessions:
-        for i in instructors:
-            if not s.fully_staffed() and i.can_work_duplex_session(s):
-                i.add_duplex_session(s)
-                s.add_duplex_instructor(i)
-
     # Pass 3. Schedule the remaining home sessions
     for s in home_sessions:
         for i in instructors:
             if not s.fully_staffed() and i.can_work_session(s):
                 i.add_session(s)
                 s.add_instructor(i)
+
+    # Pass 2. Assign instructors to serve at home
+    Instructor.max_student_capacity = Instructor.max_atHome_student_capacity
+    for s in home_sessions:
+        for i in instructors:
+            if not s.fully_staffed() and i.can_work_duplex_session(s):
+                i.add_duplex_session(s)
+                s.add_duplex_instructor(i)
+
+#    # Pass 3. Schedule the remaining home sessions
+#    for s in home_sessions:
+#        for i in instructors:
+#            if not s.fully_staffed() and i.can_work_session(s):
+#                i.add_session(s)
+#                s.add_instructor(i)
 
     if True:
         print('\nSessions Staffing Report\n')
