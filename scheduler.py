@@ -9,7 +9,7 @@ INSTRUCTOR_SHEET_NAME = 'Form Responses 1' # 'TC Form Responses 1'
 SHEET_MASTER_NAME = 'Master Student Schedule (Version 6).20200910' # 'Test Case Master Schedule'
 # WKS_EXPECTED_STUDENTS_NAME = 'TC Expected Students' # 'Expected Students'
 WKS_ACTUAL_STUDENTS_NAME = 'Actual Students' #'TC Actual Students'
-ACT_STUDENT_COL_NUM = 98 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
+ACT_STUDENT_COL_NUM = 113 # the column number (0, 1, 2, 3 ...) containing the projected student count of each session
 
 SHEET_INSTRUCTOR_SCHEDULE_NAME = 'Schedule'
 WKS_SCHEDULE_NAME = 'Instructor Schedule'
